@@ -1,0 +1,57 @@
+.PageLayout {
+    padding: 0 4rem;
+}
+
+.Content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+}
+
+button {
+    padding: 0.7rem;
+    border-radius: 5px;
+    width: 120px;
+    cursor: pointer;
+    &:hover {
+
+    }
+}
+
+
+
+.ButtonBar {
+    margin: 2rem 0;
+}
+
+.InfoBox {
+    display: flex;
+}
+
+
+.FlagContainer {
+    flex: 1;
+
+    img {
+        width: 70%;
+    }
+}
+
+.InformationContainer {
+    flex: 1;
+    line-height: 2;
+}
+
+.CountryName {
+    width: 100%;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+}
+
+.BorderCountry {
+    display: inline-block;
+    padding: 0.2rem 1rem;
+    margin-right: 0.5rem;
+    border-radius: 5px;
+}
