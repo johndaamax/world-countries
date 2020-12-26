@@ -1,5 +1,6 @@
 .wrapper {
     display: flex;
+    max-width: 100%;
 }
 
 .input {
@@ -7,5 +8,5 @@
     font-style: normal;
     width: 300px;
     padding: 1rem 0.7rem;
-    border-radius: 10px;
+    border-radius: 5px;
 }

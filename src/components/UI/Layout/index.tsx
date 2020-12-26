@@ -1,16 +1,16 @@
-import { ReactChild } from 'react'
-import { useAppContext } from '../../../context'
+import { ReactNode } from 'react'
+import { useThemeContext } from '../../../context'
 
 import Header from '../Header'
 
 import styles from './style.module.scss'
 
 type ChildrenProps = {
-    children: ReactChild | ReactChild[]
+    children: ReactNode
 }
 
 const Layout = ({ children }: ChildrenProps) => {
-    const { theme, setTheme } = useAppContext();
+    const { theme, setTheme } = useThemeContext();
     const themeToggleCallback = () => {
         if (localStorage.getItem('theme') === 'dark')
             localStorage.setItem('theme', 'light')

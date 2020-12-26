@@ -1,6 +1,6 @@
 $dark-primary: #202D36;
 $dark-secondary: #2B3743;
-$dark-text-color: #FFFFFF;
+$dark-text-color: #E4E4E4;
 $light-primary: #E7E7E7;
 $light-secondary: #FFFFFF;
 $light-text-color: #040404;
@@ -30,6 +30,22 @@ $text-color: $light-text-color;
     }
 }
 
+.dark-hover-secondary {
+    &:hover {
+        transition: all 0.6s cubic-bezier(0.275, 0.82, 0.165, 1);
+        background-color: $light-secondary;
+        color: $light-text-color;
+    }
+}
+
+.light-hover-secondary {
+    &:hover {
+        transition: all 0.6s cubic-bezier(0.275, 0.82, 0.165, 1);
+        background-color: $dark-secondary;
+        color: $dark-text-color;
+    }
+}
+
 .light-secondary {
     background-color: $light-secondary;
     color: $light-text-color;
@@ -47,6 +63,10 @@ $text-color: $light-text-color;
     padding: 0;
     border: 0;
     outline: 0;
+}
+
+a {
+    text-decoration: none;
 }
 
 body {

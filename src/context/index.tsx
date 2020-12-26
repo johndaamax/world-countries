@@ -1,25 +1,51 @@
-import { useState, useContext, createContext, ReactChild } from 'react'
+import { useState, useContext, createContext, ReactNode } from 'react'
 
-const ThemeContext = createContext({ theme: '', setTheme: (newTheme: string) => { } })
-
-type Props = {
-    children?: ReactChild | ReactChild[]
+import { CountryInfo } from '../pages/Country'
+type CountryContextProps = {
+    countries: CountryInfo[],
+    setCountries: (countries: CountryInfo[]) => void
 }
 
-const AppContext = ({ children }: Props) => {
-    const [themeState, setThemeState] = useState(localStorage.getItem('theme') || 'dark')
+const ThemeContext = createContext({ theme: '', setTheme: (newTheme: string) => { } })
+const CountriesContext = createContext<CountryContextProps>({ countries: [], setCountries: (countries) => { } })
+
+type ProviderProps = {
+    children?: ReactNode
+}
+
+export const AppProvider = ({ children }: ProviderProps) => {
+    const [themeState, setThemeState] = useState(localStorage.getItem('theme') || 'dark');
+    const [countriesState, setCountriesState] = useState<CountryInfo[]>([]);
 
     const handleTheme = (newTheme: string) => {
         setThemeState(newTheme)
     }
 
+    const setCountries = (newCountries: CountryInfo[]) => {
+        setCountriesState(newCountries)
+    }
+
     return (
         <ThemeContext.Provider value={{ theme: themeState, setTheme: handleTheme }}>
-            {children}
+            <CountriesContext.Provider value={{ countries: countriesState, setCountries: setCountries }}>
+                {children}
+            </CountriesContext.Provider>
         </ThemeContext.Provider>
     )
 }
 
-export default AppContext
+export const useThemeContext = () => {
+    const context = useContext(ThemeContext)
+    if (context === undefined) {
+        throw new Error('useThemeContext must be used within an AppProvider')
+    }
+    return context
+}
 
-export const useAppContext = () => useContext(ThemeContext)
+export const useCountriesContext = () => {
+    const context = useContext(CountriesContext)
+    if (context === undefined) {
+        throw new Error('useCountriesContext must be used within an AppProvider')
+    }
+    return context
+}

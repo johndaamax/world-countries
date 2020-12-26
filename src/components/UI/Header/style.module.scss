@@ -2,9 +2,17 @@
 
 .header {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: center;
     width: 100%;
-    padding: 1rem;
+    padding: 1rem 3rem;
+    transition: padding 0.5s ease-in-out;
+}
+
+@media screen and (max-width: 442px) {
+    .header {
+        padding: 1rem;
+    }
 }
 
 .button {

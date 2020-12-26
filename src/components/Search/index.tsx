@@ -1,7 +1,5 @@
-import { useAppContext } from '../../context'
+import { useThemeContext } from '../../context'
 import styles from './style.module.scss'
-
-import { ReactComponent as SearchIcon } from '../../assets/search-outline.svg';
 
 type SearchProps = {
     type?: string,
@@ -10,10 +8,10 @@ type SearchProps = {
 }
 
 const Search = ({ type = 'text', placeholder, callback }: SearchProps) => {
-    const { theme } = useAppContext()
+    const { theme } = useThemeContext();
     return (
         <div className={styles.wrapper}>
-            <input type={type} placeholder=' Search for a country...' className={`${styles.input} ${theme}-secondary`} onChange={(e) => callback(e.target.value)} />
+            <input type={type} placeholder={placeholder} className={`${styles.input} ${theme}-secondary`} onChange={(e) => callback(e.target.value)} />
         </div>
     )
 }

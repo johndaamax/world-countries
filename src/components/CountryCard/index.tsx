@@ -1,4 +1,6 @@
-import { useAppContext } from '../../context'
+import { useThemeContext } from '../../context'
+
+import { formatToThousands } from '../../util/helpers'
 import styles from './style.module.scss'
 
 export type CountryCardProps = {
@@ -10,15 +12,10 @@ export type CountryCardProps = {
 }
 
 const CountryCard = ({ flag, name, capital, population, region }: CountryCardProps) => {
-
-    const { theme } = useAppContext()
-    const formatToThousands = (number: number, formatterChar: string = '.') => {
-        return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, formatterChar)
-    }
+    const { theme } = useThemeContext();
     return (
         <div className={`${styles.wrapper} ${theme}-secondary`}>
-
-            <img className={styles.countryFlag} src={flag} alt={`country-flag-${name}`} />
+            <img title={`National flag of ${name}`} className={styles.countryFlag} src={flag} alt={`country-flag-${name}`} />
             <div className={styles.textDetails}>
                 <span className={styles.countryName}><strong>{name}</strong></span>
                 <span className={styles.extraDetails}><strong>Population: </strong>{formatToThousands(population)}</span>

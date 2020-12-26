@@ -1,11 +1,12 @@
 .PageLayout {
-    padding: 0 4rem;
+    padding: 0 2rem;
 }
 
 .Content {
     display: flex;
-    align-items: center;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
     margin: 0 auto;
 }
 
@@ -14,12 +15,7 @@ button {
     border-radius: 5px;
     width: 120px;
     cursor: pointer;
-    &:hover {
-
-    }
 }
-
-
 
 .ButtonBar {
     margin: 2rem 0;
@@ -27,20 +23,23 @@ button {
 
 .InfoBox {
     display: flex;
+    flex-direction: column;
+    margin-bottom: 2rem;
 }
 
-
 .FlagContainer {
-    flex: 1;
-
+    margin-bottom: 2rem;
     img {
-        width: 70%;
+        width: 100%;
+        max-width: 440px;
     }
 }
 
-.InformationContainer {
-    flex: 1;
-    line-height: 2;
+
+@media screen and (max-width: 880px){
+    .MainInformation {
+        margin-bottom: 2rem;
+    }
 }
 
 .CountryName {
@@ -52,6 +51,35 @@ button {
 .BorderCountry {
     display: inline-block;
     padding: 0.2rem 1rem;
-    margin-right: 0.5rem;
+    margin: 0 0.5rem 0.5rem 0;
     border-radius: 5px;
+}
+
+.PrimaryDetails {
+    padding: 0.2rem 0;
+}
+
+@media screen and (min-width: 880px){
+    .Content {
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: initial;
+        &>div:last-child {
+            margin-left: 1.5rem;
+        }
+    }
+    .PageLayout {
+        padding: 0 3rem;
+    }
+    .InfoBox {
+        flex-direction: row;
+    }
+
+    .FlagContainer {
+        margin: 0;
+    }
+
+    .MainInformation {
+        margin-right: 3rem;
+    }
 }
