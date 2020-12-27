@@ -2,15 +2,15 @@
     display: flex;
     flex-direction: column;
     border-radius: 5px;
-    max-width: 240px;
-    min-width: 240px;
+    max-width: 225px;
+    min-width: 225px;
 }
 
 .countryFlag {
     border-top-left-radius: 5px;
     border-top-right-radius: 5px;
-    max-width: 240px;
-    max-height: 160px;
+    max-width: 225px;
+    max-height: 140px;
     object-fit: cover;
 }
 

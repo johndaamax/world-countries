@@ -12,6 +12,7 @@ const Search = ({ type = 'text', placeholder, callback }: SearchProps) => {
     return (
         <div className={styles.wrapper}>
             <input type={type} placeholder={placeholder} className={`${styles.input} ${theme}-secondary`} onChange={(e) => callback(e.target.value)} />
+            <i className="fas fa-search"></i>
         </div>
     )
 }

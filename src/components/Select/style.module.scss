@@ -7,7 +7,6 @@
 
     ul {
         border-radius: 5px;
-        padding: 1rem;
         list-style: none;
         position: absolute;
         text-align: left;
@@ -15,21 +14,19 @@
         user-select: none;
         top: 60px;
         li {
-            padding: 0.6rem 0.2rem;
+            padding: 0.6rem 1rem;
+            width: 100%;
         }
     }
 }
 
 .SelectedText {
     border-radius: 5px;
-    padding: 1rem 0.7rem;
+    padding: 1rem 1rem;
+    display: flex;
+    justify-content: space-between;
 
-    &::after{
-        content: "";
-        position: absolute;
-        right: 10px;
-        top: 16px;
-        border: 7px solid transparent;
-        border-color: #fff transparent transparent transparent;
+    i {
+        padding-top: 5px;
     }
 }

@@ -7,12 +7,11 @@ interface SelectProps {
     defaultText: string,
     optionsList: string[],
     selected: string,
-    getRegion: (option: string) => void
+    callback: (option: string) => void
 }
 
-const Select = ({ defaultText, optionsList, selected, getRegion }: SelectProps) => {
-
-    const [isOpen, setIsOpen] = useState(false)
+const Select = ({ defaultText, optionsList, selected, callback }: SelectProps) => {
+    const [isOpen, setIsOpen] = useState(false);
 
     const { theme } = useThemeContext()
 
@@ -38,24 +37,24 @@ const Select = ({ defaultText, optionsList, selected, getRegion }: SelectProps) 
 
     const handleOptionClick = (option: string) => {
         setIsOpen(false)
-        getRegion(option)
+        callback(option)
     };
 
     return (
         <div className={styles.container}>
             <div
-                className={isOpen ? `${styles.SelectedText} ${theme}-secondary active` : `${styles.SelectedText} ${theme}-secondary`}
+                className={`${styles.SelectedText} ${theme}-secondary`}
                 onClick={handleListDisplay}
             >
                 {selected || defaultText}
+                <i className="fas fa-chevron-down"></i>
             </div>
             {isOpen && (
                 <ul className={`${theme}-secondary`}>
                     {optionsList.map(option => {
                         return (
                             <li
-                                className="custom-select-option"
-                                data-name={option}
+                                className={`custom-select-option ${theme}-hover-secondary`}
                                 key={option}
                                 onClick={() => handleOptionClick(option)}
                             >

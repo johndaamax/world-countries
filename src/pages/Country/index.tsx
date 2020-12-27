@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { Link, RouteComponentProps, useNavigate } from '@reach/router'
 import Layout from '../../components/UI/Layout'
+import Button from '../../components/Button'
 
 import { formatToThousands } from '../../util/helpers'
 
@@ -44,7 +45,10 @@ const Country = ({ location }: RouteComponentProps) => {
         <Layout>
             <div className={styles.PageLayout}>
                 <div className={styles.ButtonBar}>
-                    <button className={`${theme}-secondary ${theme}-hover-secondary`} title='Go back' onClick={() => navigate('../')}>Back</button>
+                    <Button className={`${theme}-secondary ${theme}-hover-secondary`} onClickCallback={() => navigate('../')}>
+                        <i className={`fas fa-chevron-left ${styles.icon}`}></i>
+                        Back
+                    </Button>
                 </div>
                 <div className={styles.Content}>
                     <div className={styles.FlagContainer}>
@@ -62,8 +66,19 @@ const Country = ({ location }: RouteComponentProps) => {
                             </div>
                             <div className={styles.SecondaryInformation}>
                                 <div className={styles.PrimaryDetails}><strong>Top Level Domain: </strong>{countryInfo.topLevelDomain}</div>
-                                <div className={styles.PrimaryDetails}><strong>Currencies: </strong>{countryInfo.currencies.map(curr => `${curr.name} `)}</div>
-                                <div className={styles.PrimaryDetails}><strong>Languages: </strong>{countryInfo.languages.map(lang => `${lang.name} `)}</div>
+                                <div className={styles.PrimaryDetails}>
+                                    <strong>Currencies: </strong>
+                                    {countryInfo.currencies.map(curr => `${curr.name} `)}
+                                </div>
+                                <div className={styles.PrimaryDetails}>
+                                    <strong>Languages: </strong>
+                                    {countryInfo.languages
+                                        .reduce((acc: string[], curr) => {
+                                            acc.push(curr.name)
+                                            return acc
+                                        }, [])
+                                        .join(', ')}
+                                </div>
                             </div>
                         </div>
                         {countries.length && countryInfo.borders.length > 0 &&

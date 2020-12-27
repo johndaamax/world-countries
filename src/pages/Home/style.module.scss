@@ -1,10 +1,20 @@
+.pageLayout {
+    padding: 0 1rem;
+    @media screen and (min-width: 590px){
+        padding: 0 2rem;
+    }
+    @media screen and (min-width: 840px){
+        padding: 0 3rem;
+    }
+}
+
 .gridContainer {
     display: grid;
     row-gap: 35px;
     align-items: center;
     justify-items: center;
     column-gap: 10px;
-    padding: 1rem 1rem;
+    padding: 1rem 0;
     @media screen and (min-width: 590px){
         grid-template-columns: repeat(2, 1fr);
     }
@@ -21,6 +31,14 @@
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
-    padding: 0.5rem 1rem;
     margin: 1.5rem 0;
+    div {
+        margin: 0.175rem 0;
+    }
+}
+
+.errorContainer {
+    font-size: 36px;
+    text-align: center;
+    font-weight: bold;
 }

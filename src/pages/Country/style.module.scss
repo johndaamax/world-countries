@@ -1,5 +1,10 @@
+/****************************************/
+/*******  MOBILE DEVICE STYLES  *********/
+/****************************************/
+
 .PageLayout {
     padding: 0 2rem;
+    transition: padding 0.5s ease-in-out;
 }
 
 .Content {
@@ -8,17 +13,21 @@
     justify-content: center;
     align-items: center;
     margin: 0 auto;
+    padding-bottom: 1rem;
 }
 
-button {
-    padding: 0.7rem;
-    border-radius: 5px;
-    width: 120px;
-    cursor: pointer;
+.icon {
+    position: absolute;
+    top: 14px;
+    left: 14px;
 }
 
 .ButtonBar {
     margin: 2rem 0;
+}
+
+.InformationContainer {
+    width: 100%;
 }
 
 .InfoBox {
@@ -32,13 +41,6 @@ button {
     img {
         width: 100%;
         max-width: 440px;
-    }
-}
-
-
-@media screen and (max-width: 880px){
-    .MainInformation {
-        margin-bottom: 2rem;
     }
 }
 
@@ -59,11 +61,16 @@ button {
     padding: 0.2rem 0;
 }
 
+/****************************************/
+/**********  DESKTOP STYLES  ************/
+/****************************************/
+
 @media screen and (min-width: 880px){
     .Content {
         flex-direction: row;
         justify-content: space-around;
         align-items: initial;
+        padding: 0;
         &>div:last-child {
             margin-left: 1.5rem;
         }
@@ -71,15 +78,22 @@ button {
     .PageLayout {
         padding: 0 3rem;
     }
+    .InformationContainer {
+        width: unset;
+    }
     .InfoBox {
         flex-direction: row;
     }
-
     .FlagContainer {
         margin: 0;
     }
-
     .MainInformation {
         margin-right: 3rem;
+    }
+}
+
+@media screen and (max-width: 880px){
+    .MainInformation {
+        margin-bottom: 2rem;
     }
 }
