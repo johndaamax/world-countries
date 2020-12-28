@@ -5,7 +5,7 @@ import Header from '../Header'
 
 import styles from './style.module.scss'
 
-type ChildrenProps = {
+interface ChildrenProps {
     children: ReactNode
 }
 

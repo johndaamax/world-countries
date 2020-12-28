@@ -12,7 +12,6 @@ interface SelectProps {
 
 const Select = ({ defaultText, optionsList, selected, callback }: SelectProps) => {
     const [isOpen, setIsOpen] = useState(false);
-
     const { theme } = useThemeContext()
 
     useEffect(() => {

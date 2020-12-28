@@ -1,7 +1,7 @@
 import { useThemeContext } from '../../context'
 import styles from './style.module.scss'
 
-type SearchProps = {
+interface SearchProps {
     type?: string,
     placeholder: string,
     callback: (value: string) => void

@@ -3,7 +3,7 @@ import Button from '../../Button'
 
 import styles from './style.module.scss';
 
-type HeaderProps = {
+interface HeaderProps {
     themeToggleCallback: () => void,
 }
 

@@ -3,7 +3,7 @@ import { useThemeContext } from '../../context'
 import { formatToThousands } from '../../util/helpers'
 import styles from './style.module.scss'
 
-export type CountryCardProps = {
+type CountryCardProps = {
     flag: string,
     name: string,
     capital: string,

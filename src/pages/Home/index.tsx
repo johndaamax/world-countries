@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import useMount from '../../hooks/useMount';
 import { Link, RouteComponentProps } from '@reach/router';
-import { CountryInfo } from '../Country';
 
 import Layout from '../../components/UI/Layout';
 import Search from '../../components/Search';
@@ -10,6 +9,8 @@ import Select from '../../components/Select';
 
 import { useCountriesContext } from '../../context';
 import { http, HttpResponse } from '../../api';
+
+import { CountryInfo } from '../../util/types';
 
 import styles from './style.module.scss';
 

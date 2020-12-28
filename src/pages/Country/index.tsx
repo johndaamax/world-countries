@@ -4,28 +4,10 @@ import Layout from '../../components/UI/Layout'
 import Button from '../../components/Button'
 
 import { formatToThousands } from '../../util/helpers'
+import { CountryInfo } from '../../util/types'
 
 import styles from './style.module.scss'
 import { useCountriesContext, useThemeContext } from '../../context'
-
-export interface CountryInfo {
-    alpha3Code: string,
-    name: string,
-    flag: string,
-    nativeName: string,
-    population: number,
-    region: string,
-    subregion: string,
-    capital: string,
-    topLevelDomain: string,
-    currencies: Array<{
-        code: string,
-        name: string,
-        symbol: string
-    }>
-    languages: Array<{ name: string }>
-    borders: Array<string>
-}
 
 const Country = ({ location }: RouteComponentProps) => {
     const countryInfo = location?.state as CountryInfo;
