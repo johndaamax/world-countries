@@ -1,17 +1,18 @@
 import { useState, useContext, createContext, ReactNode } from 'react'
 
-import { CountryInfo } from '../pages/Country'
-type CountryContextProps = {
+import { CountryInfo } from '../util/types'
+
+interface CountryContextProps {
     countries: CountryInfo[],
     setCountries: (countries: CountryInfo[]) => void
 }
 
-const ThemeContext = createContext({ theme: '', setTheme: (newTheme: string) => { } })
-const CountriesContext = createContext<CountryContextProps>({ countries: [], setCountries: (countries) => { } })
-
-type ProviderProps = {
+interface ProviderProps {
     children?: ReactNode
 }
+
+const ThemeContext = createContext({ theme: '', setTheme: (newTheme: string) => { } })
+const CountriesContext = createContext<CountryContextProps>({ countries: [], setCountries: (countries) => { } })
 
 export const AppProvider = ({ children }: ProviderProps) => {
     const [themeState, setThemeState] = useState(localStorage.getItem('theme') || 'dark');
