@@ -69,7 +69,7 @@ const Home = (_: RouteComponentProps) => {
                         <div className={styles.gridContainer}>
                             {displayedCountries.length > 0 && filterByRegion(displayedCountries, selectedRegion)
                                 .map(ctr =>
-                                    <Link to={`/${ctr.name}`} key={ctr.name} state={ctr}>
+                                    <Link to={`/${ctr.name.toLowerCase().replaceAll(' ', '-')}`} key={ctr.name} state={ctr}>
                                         <CountryCard
                                             flag={ctr.flag}
                                             name={ctr.name}
