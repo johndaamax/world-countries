@@ -43,7 +43,7 @@ const Home = (_: RouteComponentProps) => {
 
             let response: HttpResponse<CountryInfo[]>;
             try {
-                response = await http<CountryInfo[]>('https://restcountries.eu/rest/v2/all');
+                response = await http<CountryInfo[]>('https://restcountries.com/v2/all');
                 setCountries(response.parsedBody!);
                 if (error)
                     setError('');

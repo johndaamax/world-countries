@@ -1,4 +1,4 @@
-import { useState, useContext, createContext, ReactNode } from 'react'
+import { useState, useContext, createContext } from 'react'
 
 import { CountryInfo } from '../util/types'
 
@@ -7,14 +7,10 @@ interface CountryContextProps {
     setCountries: (countries: CountryInfo[]) => void
 }
 
-interface ProviderProps {
-    children?: ReactNode
-}
-
 const ThemeContext = createContext({ theme: '', setTheme: (newTheme: string) => { } })
 const CountriesContext = createContext<CountryContextProps>({ countries: [], setCountries: (countries) => { } })
 
-export const AppProvider = ({ children }: ProviderProps) => {
+export const AppProvider: React.FC = ({ children }) => {
     const [themeState, setThemeState] = useState(localStorage.getItem('theme') || 'dark');
     const [countriesState, setCountriesState] = useState<CountryInfo[]>([]);
 
