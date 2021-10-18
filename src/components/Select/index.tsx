@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useThemeContext } from '../../context';
 
 import styles from './style.module.scss'
@@ -21,13 +21,14 @@ const Select = ({ defaultText, optionsList, selected, callback }: SelectProps) =
         return (() => document.removeEventListener("mousedown", handleClickOutside))
     })
 
-    const handleClickOutside = (e: any) => {
+    const handleClickOutside = (e: MouseEvent) => {
+        const target = e.target as HTMLElement;
         if (
-            !e.target.classList.contains("custom-select-option") &&
-            !e.target.classList.contains(styles.SelectedText)
-        ) {
-            setIsOpen(false)
-        }
+            target.classList.contains("custom-select-option") ||
+            target.classList.contains(styles.SelectedText) ||
+            target.classList.contains('fa-chevron-down')
+        ) return;
+        setIsOpen(false);
     };
 
     const handleListDisplay = () => {

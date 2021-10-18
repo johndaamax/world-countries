@@ -14,6 +14,10 @@ import { CountryInfo } from '../../util/types';
 
 import styles from './style.module.scss';
 
+interface ApiError {
+    message: string;
+}
+
 export const filterByCountryName = (countries: CountryInfo[], searchValue: string) => {
     return countries.filter(ctr => ctr.name.toLowerCase().includes(searchValue.toLowerCase()))
 }
@@ -33,6 +37,10 @@ const Home = (_: RouteComponentProps) => {
             localStorage.setItem('theme', 'dark');
         }
         const fetchCountries = async () => {
+            const isApiError = (x: any): x is ApiError => {
+                return typeof x.message === 'string';
+            }
+
             let response: HttpResponse<CountryInfo[]>;
             try {
                 response = await http<CountryInfo[]>('https://restcountries.eu/rest/v2/all');
@@ -40,7 +48,10 @@ const Home = (_: RouteComponentProps) => {
                 if (error)
                     setError('');
             } catch (error) {
-                setError(error.message);
+                if (isApiError(error)) {
+                    // Thanks to the type guard, TypeScript knows know what "error" is
+                    setError(error.message);
+                }
             }
         }
         fetchCountries();
@@ -68,7 +79,7 @@ const Home = (_: RouteComponentProps) => {
                                 selected={selectedRegion} />
                         </div>
                         <div className={styles.gridContainer}>
-                            {displayedCountries.length > 0 && filterByRegion(displayedCountries, selectedRegion)
+                            {displayedCountries.length && filterByRegion(displayedCountries, selectedRegion)
                                 .map(ctr =>
                                     <Link to={`/${ctr.name.toLowerCase().replaceAll(' ', '-')}`} key={ctr.name} state={ctr}>
                                         <CountryCard

@@ -1,15 +1,10 @@
-import { ReactNode } from 'react'
 import { useThemeContext } from '../../../context'
 
 import Header from '../Header'
 
 import styles from './style.module.scss'
 
-interface ChildrenProps {
-    children: ReactNode
-}
-
-const Layout = ({ children }: ChildrenProps) => {
+const Layout: React.FC = ({ children }) => {
     const { theme, setTheme } = useThemeContext();
     const themeToggleCallback = () => {
         if (localStorage.getItem('theme') === 'dark')

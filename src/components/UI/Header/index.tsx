@@ -7,7 +7,7 @@ interface HeaderProps {
     themeToggleCallback: () => void,
 }
 
-const Header = ({ themeToggleCallback }: HeaderProps) => {
+const Header: React.FC<HeaderProps> = ({ themeToggleCallback }) => {
     const { theme } = useThemeContext();
     const buttonText = theme === 'dark' ? 'Light mode' : 'Dark mode';
 
