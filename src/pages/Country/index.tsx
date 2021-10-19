@@ -13,6 +13,7 @@ const Country = ({ location }: RouteComponentProps) => {
     const countryInfo = location?.state as CountryInfo;
     const { theme } = useThemeContext();
     const { countries } = useCountriesContext();
+    console.log(countryInfo)
     const navigate = useNavigate();
     useEffect(() => {
         if (countries.length === 0)
@@ -44,14 +45,16 @@ const Country = ({ location }: RouteComponentProps) => {
                                 <div className={styles.PrimaryDetails}><strong>Population: </strong>{formatToThousands(countryInfo.population)}</div>
                                 <div className={styles.PrimaryDetails}><strong>Region: </strong>{countryInfo.region}</div>
                                 <div className={styles.PrimaryDetails}><strong>Sub Region: </strong>{countryInfo.subregion}</div>
-                                <div className={styles.PrimaryDetails}><strong>Capital: </strong>{countryInfo.capital}</div>
+                                <div className={styles.PrimaryDetails}><strong>Capital: </strong>{countryInfo.capital || '-'}</div>
                             </div>
                             <div className={styles.SecondaryInformation}>
-                                <div className={styles.PrimaryDetails}><strong>Top Level Domain: </strong>{countryInfo.topLevelDomain}</div>
-                                <div className={styles.PrimaryDetails}>
-                                    <strong>Currencies: </strong>
-                                    {countryInfo.currencies.map(curr => `${curr.name} `)}
-                                </div>
+                                <div className={styles.PrimaryDetails}><strong>Top Level Domain: </strong>{countryInfo.topLevelDomain[0]}</div>
+                                {countryInfo.currencies &&
+                                    <div className={styles.PrimaryDetails}>
+                                        <strong>Currencies: </strong>
+                                        {countryInfo.currencies.map(curr => `${curr.name} `)}
+                                    </div>
+                                }
                                 <div className={styles.PrimaryDetails}>
                                     <strong>Languages: </strong>
                                     {countryInfo.languages
@@ -63,7 +66,8 @@ const Country = ({ location }: RouteComponentProps) => {
                                 </div>
                             </div>
                         </div>
-                        {countries.length && countryInfo.borders.length > 0 &&
+                        {
+                            countryInfo.borders &&
                             <div>
                                 <strong>Border Countries: </strong>
                                 {countryInfo.borders

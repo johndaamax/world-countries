@@ -6,12 +6,12 @@ import styles from './style.module.scss'
 type CountryCardProps = {
     flag: string,
     name: string,
-    capital: string,
+    capital?: string | undefined,
     population: number,
     region: string
 }
 
-const CountryCard = ({ flag, name, capital, population, region }: CountryCardProps) => {
+const CountryCard = ({ flag, name, capital = '-', population, region }: CountryCardProps) => {
     const { theme } = useThemeContext();
     return (
         <div className={`${styles.wrapper} ${theme}-secondary`}>
