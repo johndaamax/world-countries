@@ -1,4 +1,6 @@
-export const mockCountries = [
+import { CountryInfo } from "../util/types"
+
+export const mockCountries: CountryInfo[] = [
     {
         alpha3Code: 'BEL',
         name: 'Belgium',
@@ -8,7 +10,7 @@ export const mockCountries = [
         region: 'Europe',
         subregion: 'Western Europe',
         capital: 'Brussels',
-        topLevelDomain: '.be',
+        topLevelDomain: ['.be'],
         currencies: [{
             code: 'EUR',
             name: 'Euro',
@@ -26,7 +28,7 @@ export const mockCountries = [
         region: 'America',
         subregion: 'North America',
         capital: 'Ottawa',
-        topLevelDomain: '.ca',
+        topLevelDomain: ['.ca'],
         currencies: [{
             code: 'CAD',
             name: 'Canadian dollar',
@@ -44,7 +46,7 @@ export const mockCountries = [
         region: 'Americas',
         subregion: 'South America',
         capital: 'Brasília',
-        topLevelDomain: '.br',
+        topLevelDomain: ['.br'],
         currencies: [{
             code: 'BRL',
             name: 'Brazilian real',
@@ -62,7 +64,7 @@ export const mockCountries = [
         region: 'Europe',
         subregion: 'Eastern Europe',
         capital: 'Athens',
-        topLevelDomain: '.gr',
+        topLevelDomain: ['.gr'],
         currencies: [{
             code: 'EUR',
             name: 'Euro',
@@ -80,7 +82,7 @@ export const mockCountries = [
         region: 'Asia',
         subregion: 'Southeast Asia',
         capital: 'Singapore',
-        topLevelDomain: '.sg',
+        topLevelDomain: ['.sg'],
         currencies: [{
             code: 'BND',
             name: 'Brunei dollar',
