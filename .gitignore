@@ -12,3 +12,6 @@
 .eslintcache
 
 debug.log*
+
+#package managers
+.yarn
