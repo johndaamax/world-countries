@@ -29,7 +29,7 @@ const Country = ({ location }: RouteComponentProps) => {
   const navigate = useNavigate();
   useEffect(() => {
     if (!countryInfo) navigate('/');
-  }, []);
+  }, [countryInfo, navigate]);
 
   const findCountryNameFromAlpha3Code = (countryList: CountryInfo[], code: string) => {
     return countryList.find((country) => country.cca3 === code);
