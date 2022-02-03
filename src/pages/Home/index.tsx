@@ -34,6 +34,7 @@ const Home = (_: RouteComponentProps) => {
 
   const { countries, setCountries } = useCountriesContext();
   const displayedCountries = searchValue ? filterByCountryName(countries, searchValue) : countries;
+
   useMount(() => {
     if (typeof localStorage === undefined || !localStorage.getItem('theme')) {
       localStorage.setItem('theme', 'dark');
@@ -53,7 +54,7 @@ const Home = (_: RouteComponentProps) => {
         }
       }
     };
-    fetchCountries();
+    if (countries.length === 0) fetchCountries();
   });
 
   const handleInput = (input: string) => {
