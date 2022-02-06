@@ -1,18 +1,18 @@
 .wrapper {
-    display: flex;
-    max-width: 100%;
-    position: relative;
+  display: flex;
+  max-width: 100%;
+  position: relative;
 
-    i {
-        position: absolute;
-        top: 14px;
-        left: 14px;
-    }
+  i {
+    position: absolute;
+    top: 14px;
+    left: 14px;
+  }
 }
 
 .input {
-    font-size: 14px;
-    width: 300px;
-    padding: 0.8rem 0.5rem 0.8rem 2.5rem;
-    border-radius: 5px;
+  font-size: 14px;
+  width: 300px;
+  padding: 0.8rem 0.5rem 0.8rem 2.5rem;
+  border-radius: 5px;
 }

@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { useThemeContext } from '../../context';
 
 import { formatToThousands } from '../../util/helpers';
@@ -11,16 +12,12 @@ type CountryCardProps = {
   region: string;
 };
 
-const CountryCard = ({ flag, name, capital = '-', population, region }: CountryCardProps) => {
+export default function CountryCard({ flag, name, capital = '-', population, region }: CountryCardProps): ReactElement {
   const { theme } = useThemeContext();
+
   return (
-    <div className={`${styles.wrapper} ${theme}-secondary`}>
-      <img
-        title={`National flag of ${name}`}
-        className={styles.countryFlag}
-        src={flag}
-        alt={`country-flag-${name}`}
-      />
+    <div className={`${styles.wrapper} ${theme}-secondary ${theme}-hover-secondary`}>
+      <img title={`National flag of ${name}`} className={styles.countryFlag} src={flag} alt={`country-flag-${name}`} />
       <div className={styles.textDetails}>
         <span className={styles.countryName}>
           <strong>{name}</strong>
@@ -40,6 +37,4 @@ const CountryCard = ({ flag, name, capital = '-', population, region }: CountryC
       </div>
     </div>
   );
-};
-
-export default CountryCard;
+}

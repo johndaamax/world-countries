@@ -1,3 +1,4 @@
+import { ReactElement } from 'react';
 import { useThemeContext } from '../../context';
 import styles from './style.module.scss';
 
@@ -7,7 +8,7 @@ interface SearchProps {
   callback: (value: string) => void;
 }
 
-const Search = ({ type = 'text', placeholder, callback }: SearchProps) => {
+export default function Search({ type = 'text', placeholder, callback }: SearchProps): ReactElement {
   const { theme } = useThemeContext();
   return (
     <div className={styles.wrapper}>
@@ -16,11 +17,9 @@ const Search = ({ type = 'text', placeholder, callback }: SearchProps) => {
         placeholder={placeholder}
         title={placeholder}
         className={`${styles.input} ${theme}-secondary`}
-        onChange={(e) => callback(e.target.value)}
+        onChange={(e): void => callback(e.target.value)}
       />
-      <i className="fas fa-search"></i>
+      <i className="fas fa-search" />
     </div>
   );
-};
-
-export default Search;
+}

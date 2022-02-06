@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { ReactElement, useState } from 'react';
 import useMount from '../../hooks/useMount';
 import { Link, RouteComponentProps } from '@reach/router';
 
@@ -18,19 +18,18 @@ interface ApiError {
   message: string;
 }
 
-export const filterByCountryName = (countries: CountryInfo[], searchValue: string) => {
-  return countries.filter((ctr) =>
-    ctr.name.common.toLowerCase().includes(searchValue.toLowerCase()),
-  );
+export const filterByCountryName = (countries: CountryInfo[], searchValue: string): CountryInfo[] => {
+  return countries.filter((ctr) => ctr.name.common.toLowerCase().includes(searchValue.toLowerCase()));
 };
-export const filterByRegion = (countries: CountryInfo[], region: string) => {
+
+export const filterByRegion = (countries: CountryInfo[], region: string): CountryInfo[] => {
   return region === 'All' ? countries : countries.filter((ctr) => ctr.region === region);
 };
 
-const Home = (_: RouteComponentProps) => {
+function Home(_: RouteComponentProps): ReactElement {
   const [searchValue, setSearchValue] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('All');
-  const [error, setError] = useState('');
+  const [errors, setErrors] = useState('');
 
   const { countries, setCountries } = useCountriesContext();
   const displayedCountries = searchValue ? filterByCountryName(countries, searchValue) : countries;
@@ -39,7 +38,7 @@ const Home = (_: RouteComponentProps) => {
     if (typeof localStorage === undefined || !localStorage.getItem('theme')) {
       localStorage.setItem('theme', 'dark');
     }
-    const fetchCountries = async () => {
+    const fetchCountries = async (): Promise<void> => {
       const isApiError = (error: any): error is ApiError => {
         return typeof error.message === 'string';
       };
@@ -50,25 +49,25 @@ const Home = (_: RouteComponentProps) => {
       } catch (error) {
         if (isApiError(error)) {
           // Thanks to the type guard, TypeScript knows know what "error" is
-          setError(error.message);
+          setErrors(error.message);
         }
       }
     };
     if (countries.length === 0) fetchCountries();
   });
 
-  const handleInput = (input: string) => {
+  const handleInput = (input: string): void => {
     setSearchValue(input);
   };
 
-  const setRegion = (region: string) => {
+  const setRegion = (region: string): void => {
     setSelectedRegion(region);
   };
 
   return (
     <Layout>
       <main className={styles.pageLayout}>
-        {!error ? (
+        {!errors ? (
           <>
             <div className={styles.actionBar}>
               <Search placeholder="Search for a country..." callback={handleInput} />
@@ -82,9 +81,7 @@ const Home = (_: RouteComponentProps) => {
             <div className={styles.gridContainer}>
               {displayedCountries.length > 0 &&
                 filterByRegion(displayedCountries, selectedRegion)
-                  .sort((a: CountryInfo, b: CountryInfo) =>
-                    a.name.common.localeCompare(b.name.common),
-                  )
+                  .sort((a: CountryInfo, b: CountryInfo) => a.name.common.localeCompare(b.name.common))
                   .map((ctr) => (
                     <Link
                       to={`/${ctr.name.common.toLowerCase().replaceAll(' ', '-')}`}
@@ -102,11 +99,11 @@ const Home = (_: RouteComponentProps) => {
             </div>
           </>
         ) : (
-          <div className={styles.errorContainer}>{error}</div>
+          <div className={styles.errorContainer}>{errors}</div>
         )}
       </main>
     </Layout>
   );
-};
+}
 
 export default Home;

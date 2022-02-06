@@ -1,4 +1,4 @@
-import { ReactNode } from 'react';
+import { ReactElement, ReactNode } from 'react';
 
 import styles from './style.module.scss';
 
@@ -8,14 +8,12 @@ interface ButtonProps {
   children?: ReactNode;
 }
 
-const Button = ({ className, onClickCallback, children, ...rest }: ButtonProps) => {
+export default function Button({ className, onClickCallback, children, ...rest }: ButtonProps): ReactElement {
   const classes = className ? `${styles.button} ${className}` : `${styles.button}`;
 
   return (
-    <button className={classes} onClick={onClickCallback} {...rest}>
+    <button type="button" className={classes} onClick={onClickCallback} {...rest}>
       {children}
     </button>
   );
-};
-
-export default Button;
+}

@@ -2,8 +2,9 @@ import { Router } from '@reach/router';
 
 import Home from './pages/Home';
 import Country from './pages/Country';
+import { ReactElement } from 'react';
 
-function App() {
+function App(): ReactElement {
   return (
     <Router>
       <Home path="/" />

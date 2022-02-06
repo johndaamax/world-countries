@@ -1,21 +1,21 @@
 .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    padding: 1rem 3rem;
-    transition: padding 0.5s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 1rem 3rem;
+  transition: padding 0.5s ease-in-out;
 }
 
 @media screen and (max-width: 442px) {
-    .header {
-        padding: 1rem;
-        .title {
-            font-size: 14px;
-        }
+  .header {
+    padding: 1rem;
+    .title {
+      font-size: 14px;
     }
+  }
 }
 
 .icon {
-   padding-right: 0.5rem;
+  padding-right: 0.5rem;
 }

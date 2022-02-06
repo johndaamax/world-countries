@@ -1,12 +1,17 @@
+import { ReactElement } from 'react';
 import { useThemeContext } from '../../../context';
 
 import Header from '../Header';
 
 import styles from './style.module.scss';
 
-const Layout: React.FC = ({ children }) => {
+interface LayoutProps {
+  children: React.ReactNode;
+}
+
+export default function Layout({ children }: LayoutProps): ReactElement {
   const { theme, setTheme } = useThemeContext();
-  const themeToggleCallback = () => {
+  const themeToggleCallback = (): void => {
     if (localStorage.getItem('theme') === 'dark') localStorage.setItem('theme', 'light');
     else localStorage.setItem('theme', 'dark');
     setTheme(localStorage.getItem('theme')!);
@@ -18,6 +23,4 @@ const Layout: React.FC = ({ children }) => {
       {children}
     </div>
   );
-};
-
-export default Layout;
+}

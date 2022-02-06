@@ -3,97 +3,97 @@
 /****************************************/
 
 .PageLayout {
-    padding: 0 2rem;
-    transition: padding 0.5s ease-in-out;
+  padding: 0 2rem;
+  transition: padding 0.5s ease-in-out;
 }
 
 .Content {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 0 auto;
-    padding-bottom: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  padding-bottom: 1rem;
 }
 
 .icon {
-    position: absolute;
-    top: 14px;
-    left: 14px;
+  position: absolute;
+  top: 14px;
+  left: 14px;
 }
 
 .ButtonBar {
-    margin: 2rem 0;
+  margin: 2rem 0;
 }
 
 .InformationContainer {
-    width: 100%;
+  width: 100%;
 }
 
 .InfoBox {
-    display: flex;
-    flex-direction: column;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 2rem;
 }
 
 .FlagContainer {
-    margin-bottom: 2rem;
-    img {
-        width: 100%;
-        max-width: 440px;
-    }
+  margin-bottom: 2rem;
+  img {
+    width: 100%;
+    max-width: 440px;
+  }
 }
 
 .CountryName {
-    width: 100%;
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
+  width: 100%;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
 }
 
 .BorderCountry {
-    display: inline-block;
-    padding: 0.2rem 1rem;
-    margin: 0 0.5rem 0.5rem 0;
-    border-radius: 5px;
+  display: inline-block;
+  padding: 0.2rem 1rem;
+  margin: 0 0.5rem 0.5rem 0;
+  border-radius: 5px;
 }
 
 .PrimaryDetails {
-    padding: 0.2rem 0;
+  padding: 0.2rem 0;
 }
 
 /****************************************/
 /**********  DESKTOP STYLES  ************/
 /****************************************/
 
-@media screen and (min-width: 880px){
-    .Content {
-        flex-direction: row;
-        justify-content: space-around;
-        align-items: initial;
-        padding: 0;
-        &>div:last-child {
-            margin-left: 1.5rem;
-        }
+@media screen and (min-width: 880px) {
+  .Content {
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: initial;
+    padding: 0;
+    & > div:last-child {
+      margin-left: 1.5rem;
     }
-    .PageLayout {
-        padding: 0 3rem;
-    }
-    .InformationContainer {
-        width: unset;
-    }
-    .InfoBox {
-        flex-direction: row;
-    }
-    .FlagContainer {
-        margin: 0;
-    }
-    .MainInformation {
-        margin-right: 3rem;
-    }
+  }
+  .PageLayout {
+    padding: 0 3rem;
+  }
+  .InformationContainer {
+    width: unset;
+  }
+  .InfoBox {
+    flex-direction: row;
+  }
+  .FlagContainer {
+    margin: 0;
+  }
+  .MainInformation {
+    margin-right: 3rem;
+  }
 }
 
-@media screen and (max-width: 880px){
-    .MainInformation {
-        margin-bottom: 2rem;
-    }
+@media screen and (max-width: 880px) {
+  .MainInformation {
+    margin-bottom: 2rem;
+  }
 }

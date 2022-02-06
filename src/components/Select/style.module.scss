@@ -1,32 +1,32 @@
 .container {
-    display: inline-block;
-    cursor: pointer;
-    min-width: 200px;
-    text-align: center;
-    position: relative;
+  display: inline-block;
+  cursor: pointer;
+  min-width: 200px;
+  text-align: center;
+  position: relative;
 
-    ul {
-        border-radius: 5px;
-        list-style: none;
-        position: absolute;
-        text-align: left;
-        width: 100%;
-        user-select: none;
-        top: 60px;
-        li {
-            padding: 0.6rem 1rem;
-            width: 100%;
-        }
+  ul {
+    border-radius: 5px;
+    list-style: none;
+    position: absolute;
+    text-align: left;
+    width: 100%;
+    user-select: none;
+    top: 60px;
+    li {
+      padding: 0.6rem 1rem;
+      width: 100%;
     }
+  }
 }
 
 .SelectedText {
-    border-radius: 5px;
-    padding: 1rem 1rem;
-    display: flex;
-    justify-content: space-between;
+  border-radius: 5px;
+  padding: 1rem 1rem;
+  display: flex;
+  justify-content: space-between;
 
-    i {
-        padding-top: 5px;
-    }
+  i {
+    padding-top: 5px;
+  }
 }

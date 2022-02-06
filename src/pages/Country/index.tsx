@@ -1,4 +1,4 @@
-import { useEffect } from 'react';
+import { ReactElement, useEffect } from 'react';
 import { Link, RouteComponentProps, useNavigate } from '@reach/router';
 import Layout from '../../components/UI/Layout';
 import Button from '../../components/Button';
@@ -9,7 +9,7 @@ import { CountryInfo } from '../../util/types';
 import styles from './style.module.scss';
 import { useCountriesContext, useThemeContext } from '../../context';
 
-const Country = ({ location }: RouteComponentProps) => {
+function Country({ location }: RouteComponentProps): ReactElement {
   const countryInfo = location?.state as CountryInfo;
   const { theme } = useThemeContext();
   const { countries } = useCountriesContext();
@@ -31,7 +31,10 @@ const Country = ({ location }: RouteComponentProps) => {
     if (!countryInfo) navigate('/');
   }, [countryInfo, navigate]);
 
-  const findCountryNameFromAlpha3Code = (countryList: CountryInfo[], code: string) => {
+  const findCountryNameFromAlpha3Code = (
+    countryList: CountryInfo[],
+    code: string,
+  ): CountryInfo | undefined => {
     return countryList.find((country) => country.cca3 === code);
   };
 
@@ -43,8 +46,8 @@ const Country = ({ location }: RouteComponentProps) => {
             <div className={styles.ButtonBar}>
               <Button
                 className={`${theme}-secondary ${theme}-hover-secondary`}
-                onClickCallback={() => navigate('../')}>
-                <i className={`fas fa-chevron-left ${styles.icon}`}></i>
+                onClickCallback={(): Promise<void> => navigate('../')}>
+                <i className={`fas fa-chevron-left ${styles.icon}`} />
                 Back
               </Button>
             </div>
@@ -131,6 +134,6 @@ const Country = ({ location }: RouteComponentProps) => {
       </div>
     </Layout>
   );
-};
+}
 
 export default Country;
