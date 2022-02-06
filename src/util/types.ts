@@ -24,3 +24,8 @@ export interface CountryInfo {
   };
   borders?: Array<string>;
 }
+
+export enum Theme {
+  Light = 'light',
+  Dark = 'dark'
+}

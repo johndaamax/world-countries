@@ -1,5 +1,6 @@
 import { ReactElement } from 'react';
 import { useThemeContext } from '../../../context';
+import { Theme } from '../../../util/types';
 
 import Header from '../Header';
 
@@ -12,9 +13,13 @@ interface LayoutProps {
 export default function Layout({ children }: LayoutProps): ReactElement {
   const { theme, setTheme } = useThemeContext();
   const themeToggleCallback = (): void => {
-    if (localStorage.getItem('theme') === 'dark') localStorage.setItem('theme', 'light');
-    else localStorage.setItem('theme', 'dark');
-    setTheme(localStorage.getItem('theme')!);
+    if (localStorage.getItem('theme') === Theme.Dark) {
+      localStorage.setItem('theme', Theme.Light);
+      setTheme(Theme.Light);
+    } else {
+      localStorage.setItem('theme', Theme.Dark);
+      setTheme(Theme.Dark);
+    }
   };
 
   return (
