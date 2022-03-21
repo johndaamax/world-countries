@@ -1,6 +1,6 @@
 import { ReactElement, useState } from 'react';
 import useMount from '../../hooks/useMount';
-import { Link, RouteComponentProps } from '@reach/router';
+import { useNavigate } from 'react-router-dom';
 
 import Layout from '../../components/UI/Layout';
 import Search from '../../components/Search';
@@ -26,10 +26,11 @@ export const filterByRegion = (countries: CountryInfo[], region: string): Countr
   return region === 'All' ? countries : countries.filter((ctr) => ctr.region === region);
 };
 
-function Home(_: RouteComponentProps): ReactElement {
+function Home(): ReactElement {
   const [searchValue, setSearchValue] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('All');
   const [errors, setErrors] = useState('');
+  const navigate = useNavigate();
 
   const { countries, setCountries } = useCountriesContext();
   const displayedCountries = searchValue ? filterByCountryName(countries, searchValue) : countries;
@@ -83,18 +84,15 @@ function Home(_: RouteComponentProps): ReactElement {
                 filterByRegion(displayedCountries, selectedRegion)
                   .sort((a: CountryInfo, b: CountryInfo) => a.name.common.localeCompare(b.name.common))
                   .map((ctr) => (
-                    <Link
-                      to={`/${ctr.name.common.toLowerCase().replaceAll(' ', '-')}`}
+                    <CountryCard
                       key={ctr.name.common}
-                      state={ctr}>
-                      <CountryCard
-                        flag={ctr.flags.svg}
-                        name={ctr.name.common}
-                        population={ctr.population}
-                        region={ctr.region}
-                        capital={ctr.capital && ctr.capital[0]}
-                      />
-                    </Link>
+                      onClick={(): void => navigate(`/${ctr.name.common.toLowerCase().replaceAll(' ', '-')}`, { state: ctr })}
+                      flag={ctr.flags.svg}
+                      name={ctr.name.common}
+                      population={ctr.population}
+                      region={ctr.region}
+                      capital={ctr.capital && ctr.capital[0]}
+                    />
                   ))}
             </div>
           </>

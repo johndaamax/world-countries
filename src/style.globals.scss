@@ -10,6 +10,10 @@ $light-text-color: #040404;
 .dark {
   background-color: $dark-primary;
   color: $dark-text-color;
+  ::-webkit-scrollbar {
+    background-color: #040404;
+    color: #040404;
+  }
 }
 
 .light {
@@ -37,7 +41,8 @@ $light-text-color: #040404;
 
 .dark-hover-secondary {
   &:hover,
-  &:focus {
+  &:focus,
+  &:focus-visible {
     transition: all 0.6s cubic-bezier(0.275, 0.82, 0.165, 1);
     background-color: $light-secondary;
     color: $light-text-color;
@@ -46,7 +51,8 @@ $light-text-color: #040404;
 
 .light-hover-secondary {
   &:hover,
-  &:focus {
+  &:focus,
+  &:focus-visible {
     transition: all 0.6s cubic-bezier(0.275, 0.82, 0.165, 1);
     background-color: $dark-secondary;
     color: $dark-text-color;

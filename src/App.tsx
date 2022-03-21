@@ -1,4 +1,4 @@
-import { Router } from '@reach/router';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Home from './pages/Home';
 import Country from './pages/Country';
@@ -7,8 +7,10 @@ import { ReactElement } from 'react';
 function App(): ReactElement {
   return (
     <Router>
-      <Home path="/" />
-      <Country path="/:countryname" />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/:countryname" element={<Country />} />
+      </Routes>
     </Router>
   );
 }

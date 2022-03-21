@@ -1,4 +1,4 @@
-import { ReactElement } from 'react';
+import React, { ReactElement } from 'react';
 import { useThemeContext } from '../../context';
 
 import { formatToThousands } from '../../util/helpers';
@@ -10,13 +10,26 @@ type CountryCardProps = {
   capital?: string;
   population: number;
   region: string;
+  onClick: () => void;
 };
 
-export default function CountryCard({ flag, name, capital = '-', population, region }: CountryCardProps): ReactElement {
+export default function CountryCard({ flag, name, capital = '-', population, region, onClick }: CountryCardProps): ReactElement {
   const { theme } = useThemeContext();
 
+  const handleKeyPress = (event: React.KeyboardEvent): void => {
+    event.preventDefault();
+    if (event.key === 'Enter' || event.key === ' ') {
+      onClick();
+    }
+  };
+
   return (
-    <div className={`${styles.wrapper} ${theme}-secondary ${theme}-hover-secondary`}>
+    <div
+      tabIndex={0}
+      role="link"
+      className={`${styles.wrapper} ${theme}-secondary ${theme}-hover-secondary`}
+      onClick={(): void => onClick()}
+      onKeyPress={handleKeyPress}>
       <img title={`National flag of ${name}`} className={styles.countryFlag} src={flag} alt={`country-flag-${name}`} />
       <div className={styles.textDetails}>
         <span className={styles.countryName}>

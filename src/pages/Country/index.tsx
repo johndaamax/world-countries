@@ -1,5 +1,5 @@
 import { ReactElement, useEffect } from 'react';
-import { Link, RouteComponentProps, useNavigate } from '@reach/router';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Layout from '../../components/UI/Layout';
 import Button from '../../components/Button';
 
@@ -9,32 +9,20 @@ import { CountryInfo } from '../../util/types';
 import styles from './style.module.scss';
 import { useCountriesContext, useThemeContext } from '../../context';
 
-function Country({ location }: RouteComponentProps): ReactElement {
-  const countryInfo = location?.state as CountryInfo;
+function Country(): ReactElement {
+  const location = useLocation();
   const { theme } = useThemeContext();
   const { countries } = useCountriesContext();
-  const {
-    flags,
-    name,
-    population,
-    region,
-    subregion,
-    capital,
-    tld,
-    currencies,
-    languages,
-    borders,
-  } = countryInfo;
-  const { common, nativeName } = name;
   const navigate = useNavigate();
+
+  const countryInfo = location.state as CountryInfo;
+  const { flags, name, population, region, subregion, capital, tld, currencies, languages, borders } = countryInfo;
+  const { common, nativeName } = name;
   useEffect(() => {
     if (!countryInfo) navigate('/');
   }, [countryInfo, navigate]);
 
-  const findCountryNameFromAlpha3Code = (
-    countryList: CountryInfo[],
-    code: string,
-  ): CountryInfo | undefined => {
+  const findCountryNameFromAlpha3Code = (countryList: CountryInfo[], code: string): CountryInfo | undefined => {
     return countryList.find((country) => country.cca3 === code);
   };
 
@@ -44,9 +32,7 @@ function Country({ location }: RouteComponentProps): ReactElement {
         {countryInfo && (
           <>
             <div className={styles.ButtonBar}>
-              <Button
-                className={`${theme}-secondary ${theme}-hover-secondary`}
-                onClickCallback={(): Promise<void> => navigate('../')}>
+              <Button className={`${theme}-secondary ${theme}-hover-secondary`} onClickCallback={(): void => navigate(-1)}>
                 <i className={`fas fa-chevron-left ${styles.icon}`} />
                 Back
               </Button>
@@ -118,8 +104,7 @@ function Country({ location }: RouteComponentProps): ReactElement {
                       const country = findCountryNameFromAlpha3Code(countries, ctrCode);
                       return country ? (
                         <Link to={`/${country.name.common}`} key={ctrCode} state={country}>
-                          <div
-                            className={`${styles.BorderCountry} ${theme}-secondary ${theme}-hover-secondary`}>
+                          <div className={`${styles.BorderCountry} ${theme}-secondary ${theme}-hover-secondary`}>
                             {country.name.common}
                           </div>
                         </Link>
