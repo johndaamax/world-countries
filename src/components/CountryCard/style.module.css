@@ -1,0 +1,63 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  border-radius: 5px;
+  max-width: 225px;
+  min-width: 225px;
+}
+
+.countryFlag {
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  max-width: 225px;
+  max-height: 140px;
+  object-fit: cover;
+}
+
+.textDetails {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.countryName {
+  font-size: 1.15rem;
+  margin: 0.5rem 0;
+}
+
+.extraDetails {
+  font-size: 0.85rem;
+}
+
+/* Skeleton loading animation */
+@keyframes shimmer {
+  0% {
+    background-position: -468px 0;
+  }
+  100% {
+    background-position: 468px 0;
+  }
+}
+
+.skeletonText {
+  height: 0.75rem;
+  border-radius: 4px;
+  margin: 0.5rem 0;
+  background: linear-gradient(to right, var(--skeleton-bg) 8%, var(--skeleton-shine) 18%, var(--skeleton-bg) 33%);
+  background-size: 1000px 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.skeletonFlag {
+  min-height: 140px;
+  width: 100%;
+  border-radius: 4px 4px 0 0;
+  background: linear-gradient(to right, var(--skeleton-bg) 8%, var(--skeleton-shine) 18%, var(--skeleton-bg) 33%);
+  background-size: 1000px 100%;
+  animation: shimmer 1.5s infinite linear;
+}
+
+.skeletonTextWrapper {
+  margin-bottom: 0.5rem;
+}

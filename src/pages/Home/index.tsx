@@ -1,22 +1,19 @@
-import { ReactElement, useState } from 'react';
-import useMount from '../../hooks/useMount';
+import { ReactElement, useEffect, useState } from 'react';
+import { useQuery } from '@tanstack/react-query';
 import { useNavigate } from 'react-router-dom';
 
-import Layout from '../../components/UI/Layout';
-import Search from '../../components/Search';
-import CountryCard from '../../components/CountryCard';
-import Select from '../../components/Select';
+import Layout from '@/components/UI/Layout';
+import Search from '@/components/Search';
+import CountryCard from '@/components/CountryCard';
+import SkeletonCard from '@/components/CountryCard/SkeletonCard';
+import Select from '@/components/Select';
 
-import { useCountriesContext } from '../../context';
 import { http } from '../../api';
 
-import { CountryInfo } from '../../util/types';
+import { CountryInfo } from '@/util/types';
+import { formatCountryLink } from '@/util/helpers';
 
-import styles from './style.module.scss';
-
-interface ApiError {
-  message: string;
-}
+import styles from './style.module.css';
 
 export const filterByCountryName = (countries: CountryInfo[], searchValue: string): CountryInfo[] => {
   return countries.filter((ctr) => ctr.name.common.toLowerCase().includes(searchValue.toLowerCase()));
@@ -29,33 +26,26 @@ export const filterByRegion = (countries: CountryInfo[], region: string): Countr
 function Home(): ReactElement {
   const [searchValue, setSearchValue] = useState('');
   const [selectedRegion, setSelectedRegion] = useState('All');
-  const [errors, setErrors] = useState('');
+  const [errors] = useState('');
   const navigate = useNavigate();
 
-  const { countries, setCountries } = useCountriesContext();
-  const displayedCountries = searchValue ? filterByCountryName(countries, searchValue) : countries;
-
-  useMount(() => {
+  useEffect(() => {
     if (typeof localStorage === undefined || !localStorage.getItem('theme')) {
       localStorage.setItem('theme', 'dark');
     }
-    const fetchCountries = async (): Promise<void> => {
-      const isApiError = (error: any): error is ApiError => {
-        return typeof error.message === 'string';
-      };
+  }, []);
 
-      try {
-        const data = await http<CountryInfo[]>('https://restcountries.com/v3.1/all');
-        setCountries(data);
-      } catch (error) {
-        if (isApiError(error)) {
-          // Thanks to the type guard, TypeScript knows know what "error" is
-          setErrors(error.message);
-        }
-      }
-    };
-    if (countries.length === 0) fetchCountries();
+  const { data: countries, isLoading } = useQuery<CountryInfo[]>({
+    queryKey: ['countries'],
+    queryFn: () =>
+      http<CountryInfo[]>(
+        'https://restcountries.com/v3.1/all?fields=name,flags,population,region,capital,currencies,languages,borders,cca3,tld',
+      ),
+    staleTime: 60 * 60 * 24 * 1000,
+    retry: 2,
   });
+
+  const displayedCountries = searchValue ? filterByCountryName(countries || [], searchValue) : countries || [];
 
   const handleInput = (input: string): void => {
     setSearchValue(input);
@@ -80,20 +70,24 @@ function Home(): ReactElement {
               />
             </div>
             <div className={styles.gridContainer}>
-              {displayedCountries.length > 0 &&
-                filterByRegion(displayedCountries, selectedRegion)
-                  .sort((a: CountryInfo, b: CountryInfo) => a.name.common.localeCompare(b.name.common))
-                  .map((ctr) => (
-                    <CountryCard
-                      key={ctr.name.common}
-                      onClick={(): void => navigate(`/${ctr.name.common.toLowerCase().replaceAll(' ', '-')}`, { state: ctr })}
-                      flag={ctr.flags.svg}
-                      name={ctr.name.common}
-                      population={ctr.population}
-                      region={ctr.region}
-                      capital={ctr.capital && ctr.capital[0]}
-                    />
-                  ))}
+              {isLoading
+                ? Array(16)
+                    .fill(0)
+                    .map((_, index) => <SkeletonCard key={index} />)
+                : displayedCountries?.length > 0 &&
+                  filterByRegion(displayedCountries, selectedRegion)
+                    .sort((a: CountryInfo, b: CountryInfo) => a.name.common.localeCompare(b.name.common))
+                    .map((ctr) => (
+                      <CountryCard
+                        key={ctr.name.common}
+                        onClick={() => navigate(`/${formatCountryLink(ctr.name.common)}`, { state: ctr })}
+                        flag={ctr.flags.svg}
+                        name={ctr.name.common}
+                        population={ctr.population}
+                        region={ctr.region}
+                        capital={ctr.capital && ctr.capital[0]}
+                      />
+                    ))}
             </div>
           </>
         ) : (

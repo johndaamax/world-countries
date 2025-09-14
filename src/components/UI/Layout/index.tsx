@@ -1,23 +1,22 @@
-import { ReactElement } from 'react';
-import { useThemeContext } from '../../../context';
+import { ReactElement, use } from 'react';
+import { ThemeContext } from '../../../context';
 import { Theme } from '../../../util/types';
 
 import Header from '../Header';
 
-import styles from './style.module.scss';
+import styles from './style.module.css';
 
 interface LayoutProps {
   children: React.ReactNode;
 }
 
 export default function Layout({ children }: LayoutProps): ReactElement {
-  const { theme, setTheme } = useThemeContext();
+  const { theme, setTheme } = use(ThemeContext);
+
   const themeToggleCallback = (): void => {
-    if (localStorage.getItem('theme') === Theme.Dark) {
-      localStorage.setItem('theme', Theme.Light);
+    if (theme === Theme.Dark) {
       setTheme(Theme.Light);
     } else {
-      localStorage.setItem('theme', Theme.Dark);
       setTheme(Theme.Dark);
     }
   };

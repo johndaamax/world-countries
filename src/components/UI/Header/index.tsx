@@ -1,24 +1,25 @@
-import { ReactElement } from 'react';
-import { useThemeContext } from '../../../context';
+import { ReactElement, use } from 'react';
+import { ThemeContext } from '../../../context';
 import Button from '../../Button';
 
-import styles from './style.module.scss';
+import { Theme } from '@/util/types';
+import styles from './style.module.css';
 
 interface HeaderProps {
   themeToggleCallback: () => void;
 }
 
 export default function Header({ themeToggleCallback }: HeaderProps): ReactElement {
-  const { theme } = useThemeContext();
-  const buttonText = theme === 'dark' ? 'Light mode' : 'Dark mode';
+  const { theme } = use(ThemeContext);
 
-  const moonIcon =
-    theme === 'dark' ? <i className={`fas fa-moon ${styles.icon}`} /> : <i className={`far fa-moon ${styles.icon}`} />;
+  const isDark = theme === Theme.Dark;
+  const buttonText = isDark ? 'Dark mode' : 'Light mode';
+
   return (
     <header className={`${styles.header} ${theme}-secondary`}>
       <h3 className={styles.title}>Where in the world?</h3>
       <Button className={`${theme}-secondary ${theme}-hover-secondary`} onClickCallback={themeToggleCallback}>
-        {moonIcon}
+        <span className={styles.icon}>{isDark ? '🌙' : '☀️'}</span>
         {buttonText}
       </Button>
     </header>

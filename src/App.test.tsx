@@ -1,5 +1,7 @@
-import { mockCountries } from './tests/mocks'
-import { filterByCountryName, filterByRegion } from './pages/Home'
+import { describe, test, expect } from 'vitest';
+
+import { mockCountries } from './tests/mocks';
+import { filterByCountryName, filterByRegion } from './pages/Home';
 
 describe('test country filtering and searching', () => {
   test('filter country by name', () => {
@@ -23,4 +25,4 @@ describe('test country filtering and searching', () => {
     filteredContries = filterByRegion(mockCountries, 'Asia');
     expect(filteredContries.length).toBe(1);
   });
-})
+});

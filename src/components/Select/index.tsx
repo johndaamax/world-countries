@@ -1,7 +1,7 @@
-import { ReactElement, useEffect, useState } from 'react';
-import { useThemeContext } from '../../context';
+import { ReactElement, use, useEffect, useState } from 'react';
+import { ThemeContext } from '../../context';
 
-import styles from './style.module.scss';
+import styles from './style.module.css';
 
 interface SelectProps {
   defaultText: string;
@@ -12,7 +12,8 @@ interface SelectProps {
 
 export default function Select({ defaultText, optionsList, selected, callback }: SelectProps): ReactElement {
   const [isOpen, setIsOpen] = useState(false);
-  const { theme } = useThemeContext();
+  const { theme } = use(ThemeContext);
+
   const handleClickOutside = (e: MouseEvent): void => {
     const target = e.target as HTMLElement;
     if (
@@ -30,7 +31,7 @@ export default function Select({ defaultText, optionsList, selected, callback }:
     //the select container
     document.addEventListener('mousedown', handleClickOutside);
     return () => document.removeEventListener('mousedown', handleClickOutside);
-  });
+  }, []);
 
   const handleListDisplay = (): void => {
     setIsOpen((prev) => !prev);
